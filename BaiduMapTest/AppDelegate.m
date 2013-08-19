@@ -13,6 +13,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    //baidumapManager
+    self._mapManager = [[BMKMapManager alloc] init];
+    BOOL ret = [self._mapManager start:@"B41afe74586beadd3f9418f36d663c3f"  generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
     return YES;
 }
 							
