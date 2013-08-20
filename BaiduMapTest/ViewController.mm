@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "CalloutMapAnnotation.h"
+#import "CallOutAnnotationView.h"
+#import "Cell.h"
 
 @interface ViewController ()
 
@@ -156,7 +158,8 @@
 //	return nil;
 //}
 
-- (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view {
+
+- (void) mapView:(BMKMapView *) mapView didSelectAnnotationView:(BMKAnnotationView *)view {
 	if ([view.annotation isKindOfClass:[BMKPointAnnotation class]]) {
         if (self.callOutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
             self.callOutAnnotation.coordinate.longitude == view.annotation.coordinate.longitude) {
@@ -176,38 +179,26 @@
 }
 
 - (void)mapView:(BMKMapView *)mapView didDeselectAnnotationView:(BMKAnnotationView *)view {
-    if (_calloutAnnotation&& ![view isKindOfClass:[CallOutAnnotationVifew class]]) {
-        if (_calloutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
-            _calloutAnnotation.coordinate.longitude == view.annotation.coordinate.longitude) {
-            [mapView removeAnnotation:_calloutAnnotation];
-            _calloutAnnotation = nil;
+    if (self.callOutAnnotation && ![view isKindOfClass:[CallOutAnnotationView class]]) {
+        if (self.callOutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
+            self.callOutAnnotation.coordinate.longitude == view.annotation.coordinate.longitude) {
+            [mapView removeAnnotation:self.callOutAnnotation];
+            self.callOutAnnotation = nil;
         }
     }
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation {
 	if ([annotation isKindOfClass:[CalloutMapAnnotation class]]) {
-        
-        CallOutAnnotationVifew *annotationView = (CallOutAnnotationVifew *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutView"];
+        CallOutAnnotationView *annotationView = (CallOutAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutView"];
         if (!annotationView) {
-            annotationView = [[[CallOutAnnotationVifew alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"] autorelease];
-            JingDianMapCell  *cell = [[[NSBundle mainBundle] loadNibNamed:@"JingDianMapCell" owner:self options:nil] objectAtIndex:0];
+            annotationView = [[CallOutAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"];
+            Cell *cell = [[[NSBundle mainBundle] loadNibNamed:@"Cell" owner:self options:nil] objectAtIndex:0];
             [annotationView.contentView addSubview:cell];
             
         }
         return annotationView;
-	} else if ([annotation isKindOfClass:[BasicMapAnnotation class]]) {
-        
-        MKAnnotationView *annotationView =[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
-        if (!annotationView) {
-            annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation
-                                                           reuseIdentifier:@"CustomAnnotation"] autorelease];
-            annotationView.canShowCallout = NO;
-            annotationView.image = [UIImage imageNamed:@"pin.png"];
-        }
-		
-		return annotationView;
-    }
+	}
 	return nil;
 }
 @end
