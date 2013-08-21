@@ -14,6 +14,7 @@
 		0E648BCD17BCBB3400DAB027 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E648BCC17BCBB3400DAB027 /* OpenGLES.framework */; };
 		0E648BCF17BCBB3B00DAB027 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E648BCE17BCBB3B00DAB027 /* SystemConfiguration.framework */; };
 		0E648BD317BCBDFD00DAB027 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E648BD217BCBDFD00DAB027 /* libbaidumapapi.a */; };
+		0E9FDB1217C4508300BC82D7 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9FDB1117C4508300BC82D7 /* BasicMapAnnotation.m */; };
 		0EA0C05917C2FE240096834D /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0EA0C05817C2FE240096834D /* mapapi.bundle */; };
 		0EA0C05B17C300340096834D /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA0C05A17C300340096834D /* Cell.xib */; };
 		0EA0C05E17C300480096834D /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA0C05D17C300480096834D /* Cell.m */; };
@@ -69,6 +70,8 @@
 		0E648BCC17BCBB3400DAB027 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		0E648BCE17BCBB3B00DAB027 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0E648BD217BCBDFD00DAB027 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		0E9FDB1017C4508200BC82D7 /* BasicMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicMapAnnotation.h; sourceTree = "<group>"; };
+		0E9FDB1117C4508300BC82D7 /* BasicMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicMapAnnotation.m; sourceTree = "<group>"; };
 		0EA0C05817C2FE240096834D /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		0EA0C05A17C300340096834D /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
 		0EA0C05C17C300480096834D /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
@@ -161,6 +164,7 @@
 				0EEAF69117BCBA3B0015F179 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		0EEAF69117BCBA3B0015F179 /* Products */ = {
 			isa = PBXGroup;
@@ -196,6 +200,8 @@
 				0EA0C05A17C300340096834D /* Cell.xib */,
 				0EA0C05C17C300480096834D /* Cell.h */,
 				0EA0C05D17C300480096834D /* Cell.m */,
+				0E9FDB1017C4508200BC82D7 /* BasicMapAnnotation.h */,
+				0E9FDB1117C4508300BC82D7 /* BasicMapAnnotation.m */,
 			);
 			path = BaiduMapTest;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 				0E316E1417C2105900752B6C /* CalloutMapAnnotation.m in Sources */,
 				0E316E1717C211B100752B6C /* CallOutAnnotationView.m in Sources */,
 				0EA0C05E17C300480096834D /* Cell.m in Sources */,
+				0E9FDB1217C4508300BC82D7 /* BasicMapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +382,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaiduMapTest/BaiduMapTest-Prefix.pch";
 				INFOPLIST_FILE = "BaiduMapTest/BaiduMapTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -390,6 +398,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaiduMapTest/BaiduMapTest-Prefix.pch";
 				INFOPLIST_FILE = "BaiduMapTest/BaiduMapTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

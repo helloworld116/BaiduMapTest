@@ -8,8 +8,11 @@
 
 #import "ViewController.h"
 #import "CalloutMapAnnotation.h"
+#import "BasicMapAnnotation.h"
 #import "CallOutAnnotationView.h"
 #import "Cell.h"
+
+//#define span 40000
 
 @interface ViewController ()
 
@@ -51,6 +54,8 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    NSArray *points = [self testData];
+    
 //    // 添加一个PointAnnotation
 //    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
 //    CLLocationCoordinate2D coor;
@@ -60,23 +65,34 @@
 //    annotation.title = @"这里是北京";
 //    [self.mapView addAnnotation:annotation];
     
-    NSArray *points = [self testData];
-    //给view中心定位
+//    //给view中心定位
     BMKCoordinateRegion region;
     region.center.latitude  = [[[points objectAtIndex:0] objectForKey:@"latitude"] doubleValue];
     region.center.longitude = [[[points objectAtIndex:0] objectForKey:@"longitude"] doubleValue];
     region.span.latitudeDelta  = 0.01;
     region.span.longitudeDelta = 0.01;
-    self.mapView.region   = region;
+    self.mapView.region = region;
+//
+//    for (NSDictionary *point in points) {
+//        BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
+//        CLLocationCoordinate2D coor;
+//        coor.latitude = [[point objectForKey:@"latitude"] doubleValue];
+//        coor.longitude = [[point objectForKey:@"longitude"] doubleValue];
+//        annotation.coordinate = coor;
+////        annotation.title = @"这里是北京";
+//        [self.mapView addAnnotation:annotation];
+//    }
     
-    for (NSDictionary *point in points) {
-        BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
-        CLLocationCoordinate2D coor;
-        coor.latitude = [[point objectForKey:@"latitude"] doubleValue];
-        coor.longitude = [[point objectForKey:@"longitude"] doubleValue];
-        annotation.coordinate = coor;
-//        annotation.title = @"这里是北京";
-        [self.mapView addAnnotation:annotation];
+    for (NSDictionary *dic in points) {
+        CLLocationDegrees latitude=[[dic objectForKey:@"latitude"] doubleValue];
+        CLLocationDegrees longitude=[[dic objectForKey:@"longitude"] doubleValue];
+//        CLLocationCoordinate2D location=CLLocationCoordinate2DMake(latitude, longitude);
+//        BMKCoordinateRegion region=BMKCoordinateRegionMakeWithDistance(location,span ,span );
+//        BMKCoordinateRegion adjustedRegion = [_mapView regionThatFits:region];
+//        [_mapView setRegion:adjustedRegion animated:YES];
+        
+        BasicMapAnnotation *annotation=[[BasicMapAnnotation alloc] initWithLatitude:latitude andLongitude:longitude];
+        [_mapView addAnnotation:annotation];
     }
 }
 
@@ -159,7 +175,10 @@
 //}
 
 
-- (void) mapView:(BMKMapView *) mapView didSelectAnnotationView:(BMKAnnotationView *)view {
+
+
+
+- (void)mapView:(BMKMapView *) mapView didSelectAnnotationView:(BMKAnnotationView *)view {
 	if ([view.annotation isKindOfClass:[BMKPointAnnotation class]]) {
         if (self.callOutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
             self.callOutAnnotation.coordinate.longitude == view.annotation.coordinate.longitude) {
@@ -173,7 +192,6 @@
                                initWithLatitude:view.annotation.coordinate.latitude
                                andLongitude:view.annotation.coordinate.longitude];
         [mapView addAnnotation:self.callOutAnnotation];
-        
         [mapView setCenterCoordinate:self.callOutAnnotation.coordinate animated:YES];
 	}
 }
@@ -198,7 +216,28 @@
             
         }
         return annotationView;
-	}
+	}else if ([annotation isKindOfClass:[BasicMapAnnotation class]]) {
+//        BMKAnnotationView *annotationView =[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
+//        if (!annotationView) {
+//            annotationView = [[BMKAnnotationView alloc] initWithAnnotation:annotation
+//                                                           reuseIdentifier:@"CustomAnnotation"];
+//            annotationView.canShowCallout = NO;
+////            annotationView.image = [UIImage imageNamed:@"pin.png"];
+//        }
+        
+        NSString *AnnotationViewID = @"renameMark";
+        BMKAnnotationView *annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
+        if (annotationView == nil) {
+            // 设置颜色
+            ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
+            // 从天上掉下效果
+            //		((BMKPinAnnotationView*)newAnnotation).animatesDrop = YES;
+            // 设置可拖拽
+            ((BMKPinAnnotationView*)annotationView).draggable = YES;
+        }
+		return annotationView;
+    }
+
 	return nil;
 }
 @end
