@@ -160,7 +160,7 @@
 //        }
 //        return annotationView;
 //	} else if ([annotation isKindOfClass:[BasicMapAnnotation class]]) {
-//        
+//
 //        MKAnnotationView *annotationView =[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
 //        if (!annotationView) {
 //            annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation
@@ -173,9 +173,6 @@
 //    }
 //	return nil;
 //}
-
-
-
 
 
 - (void)mapView:(BMKMapView *) mapView didSelectAnnotationView:(BMKAnnotationView *)view {
