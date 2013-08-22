@@ -10,6 +10,6 @@
 
 @interface ViewController : UIViewController<BMKMapViewDelegate>
 
-@property (strong,nonatomic) BMKMapView* mapView;
+@property (strong,nonatomic) IBOutlet BMKMapView* mapView;
 
 @end
