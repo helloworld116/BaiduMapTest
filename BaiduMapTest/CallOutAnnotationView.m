@@ -19,36 +19,19 @@
 
 @implementation CallOutAnnotationView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 - (id)initWithAnnotation:(id<BMKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.canShowCallout = NO;
-        self.centerOffset = CGPointMake(0, -55);
-        self.frame = CGRectMake(0, 0, 240, 80);
+        self.centerOffset = CGPointMake(0, -70);
+        self.frame = CGRectMake(0, 0, 280, 80);
         
-        UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - Arror_height)];
-        contentView.backgroundColor   = [UIColor clearColor];
-        [self addSubview:contentView];
-        self.contentView = contentView;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - Arror_height)];
+        view.backgroundColor   = [UIColor clearColor];
+        [self addSubview:view];
+        self.contentView = view;
         
     }
     return self;

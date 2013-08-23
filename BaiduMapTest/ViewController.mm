@@ -307,6 +307,9 @@
         if (!annotationView) {
             annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomAnnotation"];
             ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
+            // 单击弹出泡泡，弹出泡泡前提annotation必须实现title属性
+            annotationView.canShowCallout = NO;
+            annotationView.annotation = annotation;
         }
 		return annotationView;
     }
@@ -328,6 +331,7 @@
 //        BasicMapAnnotation *  annotation=[[BasicMapAnnotation alloc] initWithLatitude:latitude andLongitude:longitude];
 //        [_mapView addAnnotation:annotation];
         BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
+        annotation.title= @"cnm";
         annotation.coordinate = coordinate;
         [self.mapView addAnnotation:annotation];
     }
@@ -342,12 +346,12 @@
 
 - (NSArray *)testData{
     NSDictionary *dict1 =@{@"longitude": @"116.404",@"latitude":@"39.915"};
-//    NSDictionary *dict2 =@{@"longitude": @"113.958871",@"latitude":@"22.542872"};
-//    NSDictionary *dict3 =@{@"longitude": @"113.957971",@"latitude":@"22.548972"};
-//    NSDictionary *dict4 =@{@"longitude": @"113.954671",@"latitude":@"22.543672"};
-//    NSDictionary *dict5 =@{@"longitude": @"113.955671",@"latitude":@"22.542672"};
-//    NSArray *arr = @[dict1,dict2,dict3,dict4,dict5];
-    NSArray *arr = @[dict1];
+    NSDictionary *dict2 =@{@"longitude": @"113.958871",@"latitude":@"22.542872"};
+    NSDictionary *dict3 =@{@"longitude": @"113.957971",@"latitude":@"22.548972"};
+    NSDictionary *dict4 =@{@"longitude": @"113.954671",@"latitude":@"22.543672"};
+    NSDictionary *dict5 =@{@"longitude": @"113.955671",@"latitude":@"22.542672"};
+    NSArray *arr = @[dict1,dict2,dict3,dict4,dict5];
+//    NSArray *arr = @[dict1];
     return arr;
 }
 
@@ -357,6 +361,8 @@
     _annotationList = [[NSMutableArray alloc] init];
     self.mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
 //    self.view = self.mapView;
+    //设置地图缩放级别
+    [_mapView setZoomLevel:11];
     [super viewDidLoad];
 }
 
