@@ -207,58 +207,10 @@
 //    }
 //}
 //
-//- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation {
-//	if ([annotation isKindOfClass:[CalloutMapAnnotation class]]) {
-//        CallOutAnnotationView *annotationView = (CallOutAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutView"];
-//        if (!annotationView) {
-//            annotationView = [[CallOutAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"];
-//            Cell *cell = [[[NSBundle mainBundle] loadNibNamed:@"Cell" owner:self options:nil] objectAtIndex:0];
-//            [annotationView.contentView addSubview:cell];
-//            
-//        }
-//        return annotationView;
-<<<<<<< HEAD
-//	} else if ([annotation isKindOfClass:[BasicMapAnnotation class]]) {
-//
-//        MKAnnotationView *annotationView =[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
-//        if (!annotationView) {
-//            annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation
-//                                                           reuseIdentifier:@"CustomAnnotation"] autorelease];
-//            annotationView.canShowCallout = NO;
-//            annotationView.image = [UIImage imageNamed:@"pin.png"];
-=======
-//	}else if ([annotation isKindOfClass:[BasicMapAnnotation class]]) {
-////        BMKAnnotationView *annotationView =[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
-////        if (!annotationView) {
-////            annotationView = [[BMKAnnotationView alloc] initWithAnnotation:annotation
-////                                                           reuseIdentifier:@"CustomAnnotation"];
-////            annotationView.canShowCallout = NO;
-//////            annotationView.image = [UIImage imageNamed:@"pin.png"];
-////        }
-//        
-//        NSString *AnnotationViewID = @"renameMark";
-//        BMKAnnotationView *annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
-//        if (annotationView == nil) {
-//            // 设置颜色
-//            ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
-//            // 从天上掉下效果
-//            //		((BMKPinAnnotationView*)newAnnotation).animatesDrop = YES;
-//            // 设置可拖拽
-//            ((BMKPinAnnotationView*)annotationView).draggable = YES;
->>>>>>> b00372e09f6d625e36f14dbb59eb019fc357fa3b
-//        }
-//		return annotationView;
-//    }
-//
-//	return nil;
-//}
-<<<<<<< HEAD
+
 
 
 - (void)mapView:(BMKMapView *) mapView didSelectAnnotationView:(BMKAnnotationView *)view {
-=======
-- (void) mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view{
->>>>>>> b00372e09f6d625e36f14dbb59eb019fc357fa3b
 	if ([view.annotation isKindOfClass:[BMKPointAnnotation class]]) {
         if (_calloutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
             _calloutAnnotation.coordinate.longitude == view.annotation.coordinate.longitude) {
